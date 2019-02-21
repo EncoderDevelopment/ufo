@@ -890,6 +890,7 @@
     <Compile Include="Assets\DreamStarGenerator\Scripts\MeshGenerator\MeshExporter.cs" />
     <Compile Include="Assets\DreamStarGenerator\Scripts\MeshGenerator\MeshGenerator.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Effects\Fade.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PlayerControllerLabirinto.cs" />

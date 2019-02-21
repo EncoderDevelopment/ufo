@@ -10,6 +10,8 @@ public class MainMenu : MonoBehaviour
     public GameObject popupMenu;
     private bool startButton = false;
     float timeLeft = 0.1f;
+    private Fade effectFade;
+
 
     private void Start()
     {
@@ -22,9 +24,26 @@ public class MainMenu : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(ReturnGame);            
         }
 
+        effectFade = new Fade();
+        effectFade.Start();
+        RemoveLayerFade();
+      
     }
 
 
+    public void RemoveLayerFade()
+    {
+        StartCoroutine(WaitLayerRemove());
+    }
+
+    public IEnumerator WaitLayerRemove()
+    {
+        yield return new WaitForSeconds(2);
+        effectFade.effectsFade.SetActive(false);
+
+    }
+
+    
 
     private void Update()
     {
@@ -63,27 +82,42 @@ public class MainMenu : MonoBehaviour
 
     public void ReurnMainMenu()
     {
+        Debug.Log("RETURN");
+        effectFade.effectsFade.SetActive(true);
+        effectFade.FadeOutToScene();
+        effectFade.FadeInToScene();
+        effectFade.effectsFade.SetActive(false);
         SceneManager.LoadScene("Menu");
-        Time.timeScale = 0;
+        Time.timeScale = 1;
     }
 
     public void PlayUfo() {
+
+        effectFade.effectsFade.SetActive(true);
+        effectFade.FadeOutToScene();
+        WaitLayerRemove();
         SceneManager.LoadScene("Ufo");
-        
+        Time.timeScale = 1;
     }
 
     public void PlayLabirinto()
     {
+        effectFade.effectsFade.SetActive(true);
+        effectFade.FadeOutToScene();        
         SceneManager.LoadScene("Labirinto");
+        Time.timeScale = 1;
 
     }
    
 
     public void QuitGame()
     {
+        effectFade.FadeOutToScene();
         Debug.Log("QUIT");
         Application.Quit();
 
     }
+
+   
 
 }

@@ -12,7 +12,8 @@ public class PlayerControllerUfo : MonoBehaviour
     public Text countText;
     public Text winText;
     private int count;
-    
+    private Fade effectFade;
+
 
     private void Start()
     {
@@ -20,8 +21,23 @@ public class PlayerControllerUfo : MonoBehaviour
         count = 0;
         SetCountTextUfo();
         winText.text = "";
+
+        effectFade = new Fade();
+        effectFade.Start();
+        RemoveLayerFade();
     }
-    
+
+
+    public void RemoveLayerFade()
+    {
+        StartCoroutine(WaitLayerRemove());
+    }
+
+    public IEnumerator WaitLayerRemove()
+    {
+        yield return new WaitForSeconds(1);
+        effectFade.effectsFade.SetActive(false);
+    }
 
     private void FixedUpdate()
     {
@@ -63,6 +79,7 @@ public class PlayerControllerUfo : MonoBehaviour
     IEnumerator LoadMenu()
     {
         yield return new WaitForSeconds(5);
+        effectFade.FadeOutToScene();
         SceneManager.LoadScene("Menu");
     }
 }
